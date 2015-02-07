@@ -92,8 +92,8 @@ This code takes creat of creating an editId on the first pass through the form a
 (Fetching $posting and validating that the user is allowed to edit that posting is up to you.)
 
     $request = $this->getRequest();
+    $editId = $request->get('editId');
 
-    $editId = $this->getRequest()->get('editId');
     if (!preg_match('/^\d+$/', $editId))
     {
         $editId = sprintf('%09d', mt_rand(0, 1999999999));
@@ -150,6 +150,7 @@ In the Edit Template
 Let's assume there is an edit.html.twig template associated with the edit action. Here's what it might look like. Note that the render call in your action would pass in the posting object, the editId, the existingFiles array and the isNew flag:
 
     {% extends "MyBundle:Default:layout.html.twig" %}
+    {% set isNew = posting.id ? 0 : 1 %}
 
     {% block body %}
 
@@ -167,7 +168,6 @@ Let's assume there is an edit.html.twig template associated with the edit action
         {% if not isNew %}
             <a class="btn btn-danger" href="{{ path('delete', { id: posting.id } ) }}">Delete</a>
         {% endif %}
-
     </form>
 
     <script type="text/javascript">

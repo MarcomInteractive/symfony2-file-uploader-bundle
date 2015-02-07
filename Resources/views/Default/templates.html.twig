@@ -29,7 +29,7 @@
 
 {# parameters to underscore template: name, thumbnail_url, original_url #}
 <script type="text/template" id="file-uploader-file-template">
-    <li data-name="<%- name %>" class="thumbnail">
+    <li data-name="<%- name %>" class="thumbnail-wrapper">
         {# Some things can be thumbnailed, some things not #}
         <% if ('undefined' != typeof thumbnail_url) { %>
             <img src="<%- thumbnail_url %>" class="thumbnail-image" />
